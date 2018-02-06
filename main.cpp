@@ -12,7 +12,7 @@ inline int nxt() {
 	return x;
 }
 
-#include "fft.h"
+#include "fft/fft_integer.h"
 
 void test_fft() {
 	auto /*function<vector<long long>(int, int)>*/ genRandVec = [](int n, int limit = mod) {
