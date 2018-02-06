@@ -85,6 +85,7 @@ void sanitizeHalfplanes(vector<halfplane>& planes, bool doAdd, bool doSort) {
     }
     
     // Normalize halfplanes. This is used when selecting strictest of parallel halfplanes
+    // NOT NEEDED if there are no collinear (and not antiparallel) normals, but may improve precision
     for (halfplane& h: planes) {
         ld len = h.norm().len();
         h.a /= len;
@@ -95,11 +96,6 @@ void sanitizeHalfplanes(vector<halfplane>& planes, bool doAdd, bool doSort) {
     if (doSort)
         sort(all(planes), [&](halfplane& a, halfplane& b) { return vecLess(a.norm(), b.norm()) > 0; });
 }
-
-
-using Halfplane = halfplane;
-using point = point;
-
 
 class polygon {
 public:
@@ -153,7 +149,8 @@ polygon getPolygon(const vector<halfplane>& planes) {
             ++l;
         }
         
-        if (r - l > 0 && ans[r - 1].norm().vprod(h.norm()) <= 0) {
+        // WATCH OUT: you may need to tweak eps here for severe problems
+        if (r - l > 0 && ans[r - 1].norm().vprod(h.norm()) <= -1e-7) {
             return polygon();
         }
         
