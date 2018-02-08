@@ -7,8 +7,7 @@ public:
 		_node* l;
 		_node* r;
 		_node *p;
-		int pType;
-		_node(int val) :val(val), l(nullptr), r(nullptr), cnt(1) { prior = rand(); }
+		_node(int val) :val(val), l(nullptr), r(nullptr), cnt(1), p(nullptr) { prior = rand(); }
 
 		void push() {
 			
