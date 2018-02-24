@@ -247,3 +247,28 @@ Node merge(const Node& q, const Node& w) {
     return res;
 }
 ```
+
+## Считываем размеры в нужном порядке
+Неправильно:
+
+```c++
+int n, m;
+cin >> n >> m;  // w, h
+vector<vector<int>> a(n, vector<int>(m, 0));
+for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+        cin >> a[i][j];
+    }
+}
+```
+Правильно:
+```c++
+int n, m;
+cin >> m >> n;  // w, h
+vector<vector<int>> a(n, vector<int>(m, 0));
+for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+        cin >> a[i][j];
+    }
+}
+```
