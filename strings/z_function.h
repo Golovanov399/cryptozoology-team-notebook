@@ -1,4 +1,4 @@
-vector<int> zFunction(string s) {
+vector<int> zFunction(const string& s) {
     int n = s.length();
 
     vector<int> z(n);
