@@ -1,6 +1,9 @@
 const int mod = 998244353;
 const int L = 22;	// can be 23 for 998244353
 const int N = 1 << L;
+bool fft_initialized = false;
+
+using Poly = vector<long long>;
 
 long long pw(long long a, long long b) {
 	long long res = 1;
@@ -27,7 +30,7 @@ const int root = getRoot();
 long long angles[N + 1];
 int bitrev[N];
 
-void init() {
+void fft_init() {
 	angles[0] = 1;
 	for (int i = 1; i <= N; ++i) {
 		angles[i] = angles[i - 1] * root % mod;
@@ -40,6 +43,8 @@ void init() {
 			x >>= 1;
 		}
 	}
+
+	fft_initialized = true;
 }
 
 inline int revBit(int x, int len) {
@@ -47,6 +52,7 @@ inline int revBit(int x, int len) {
 }
 
 void fft(vector<long long>& a, bool inverse = false) {
+	assert(fft_initialized && "you fucking cunt just write fft_init()");
 	int n = a.size();
 	assert(!(n & (n - 1)));	// work only with powers of two
 	int l = __builtin_ctz(n);
@@ -80,7 +86,7 @@ void fft(vector<long long>& a, bool inverse = false) {
 	if (inverse) {
 		int rev_deg = 1;
 		for (int i = 0; i < l; ++i) {
-			rev_deg = (rev_deg % 2) ? (rev_deg + mod) / 2 : rev_deg / 2;
+			rev_deg = (rev_deg % 2) ? ((rev_deg + mod) / 2) : (rev_deg / 2);
 		}
 		for (auto& x : a) {
 			x = x * rev_deg % mod;
@@ -88,7 +94,7 @@ void fft(vector<long long>& a, bool inverse = false) {
 	}
 }
 
-vector<long long> multiply(vector<long long> a, vector<long long> b) {
+Poly multiply(Poly a, Poly b) {
 	int n = 1;
 	while (n < (int)a.size() || n < (int)b.size()) {
 		n *= 2;
@@ -105,21 +111,4 @@ vector<long long> multiply(vector<long long> a, vector<long long> b) {
 		a.pop_back();
 	}
 	return a;
-}
-
-vector<long long> stupidMult(vector<long long> a, vector<long long> b) {
-	int n = a.size(), m = b.size();
-	vector<long long> res(n + m - 1);
-	for (int i = 0; i < n; ++i) {
-		for (int j = 0; j < m; ++j) {
-			res[i + j] += a[i] * b[j] % mod;
-		}
-	}
-	for (int i = 0; i < n + m - 1; ++i) {
-		res[i] %= mod;
-	}
-	while (!res.empty() && res.back() == 0) {
-		res.pop_back();
-	}
-	return res;
 }
