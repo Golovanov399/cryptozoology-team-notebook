@@ -1,0 +1,5 @@
+// Executable: sed
+// Arguments: -s 's/#include ".*"/#include "$FileName$"/' main.cpp
+// Working directory: $ProjectFileDir$
+// ! Synchronize files after execution
+// ! Open console for tool output
