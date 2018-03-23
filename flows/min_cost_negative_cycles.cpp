@@ -7,9 +7,6 @@ struct MinCost {
         g.resize(n);
     }
 
-    cost_type cost = 0;
-    int flow = 0;
-
     struct edge {
         int from, to;
         int cap;
@@ -20,17 +17,19 @@ struct MinCost {
     vector<edge> edges;
     vector<vector<int>> g;
 
-    void add_edge(int from, int to, cost_type cur_cost, int cap, int flow = 0) {
-        cost += cur_cost * flow;
-        edge e = {from, to, cap, cur_cost, flow};
+    void add_edge(int from, int to, cost_type cur_cost, int cap) {
+        edge e = {from, to, cap, cur_cost, 0};
         g[from].push_back(edges.size());
         edges.push_back(e);
-        edge e2 = {to, from, 0, -cur_cost, -flow};
+        edge e2 = {to, from, 0, -cur_cost, 0};
         g[to].push_back(edges.size());
         edges.push_back(e2);
     }
 
     pair<int, cost_type> min_cost(int n, int s, int t, int max_flow_value = FLOW_INF) {
+        cost_type cost = 0;
+        int flow = 0;
+
         vector<int> p(n);
         vector<cost_type> d(n, 0);
         vector<int> to_add;
@@ -162,7 +161,6 @@ struct MinCost {
                     }
                 }
             }
-
             if (!found) {
                 break;
             }
