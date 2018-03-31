@@ -10,6 +10,7 @@ header = """\\documentclass[10pt,twocolumn]{article}
 \\usepackage{amsthm, amssymb}
 \\usepackage{amsmath}
 \\usepackage{lmodern}
+\\usepackage{graphicx}
 
 \\usepackage{fontspec}
 \\defaultfontfeatures{Mapping=tex-text}
@@ -26,13 +27,19 @@ header = """\\documentclass[10pt,twocolumn]{article}
 \\voffset = -3cm
 \\hoffset = -1.5cm
 
-\\renewcommand{\\baselinestretch}{0.9}
+\\renewcommand{\\baselinestretch}{0.85}
 
 \\makeatletter
-\\renewcommand{\\@oddhead}{\\tt Moscow IPT Cryptozoology\\hfil\\thepage}
+\\renewcommand{\\@oddhead}{\\tt Moscow I of Physics and Technology
+\\hfil\\thepage}
 \\makeatother
 
 \\begin{document}
+
+\\begin{titlepage}
+\\includegraphics[height=.9\\textheight]{titlepic}
+\\end{titlepage}
+
 \\small
 \\usemintedstyle{pastie}
 \\tableofcontents
@@ -46,7 +53,7 @@ minted_end = "\\end{minted}"
 
 allowed_extensions = ['.cpp', '.h', '.py', '.txt', '.tex']
 ext_to_lang = {'.cpp': 'c++', '.h': 'c++', '.py': 'python'}
-excluded_files = ['make_book.py', 'fft_test_double.cpp', 'fft_test_integer.cpp']
+excluded_files = ['make_book.py', 'fft_test_double.cpp', 'fft_test_integer.cpp', 'fft_advanced_double.h']
 
 
 def get_minted(text, lang='c++'):
