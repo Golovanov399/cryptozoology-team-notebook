@@ -4,7 +4,7 @@ struct state {
     array<int, ALPHABET> transition = {};
     int link = 0;
     
-    bool isTerminal;
+    bool isTerminal = false;
 };
 
 struct automaton {
