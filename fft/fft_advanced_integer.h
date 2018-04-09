@@ -9,7 +9,7 @@ Poly derivative(Poly a) {
 	return a;
 }
 
-// returns b(x) = int_0^x{a(t)dt}
+// returns $b(x) = \int_0^x{a(t)\,dt}$
 Poly primitive(Poly a) {
 	if (a.empty()) {
 		return a;
@@ -44,7 +44,7 @@ Poly normalize(Poly a) {
 	return a;
 }
 
-// get such b that a * b = 1 mod x^{prec}
+// get such $b$ that $a\cdot b = 1 \pmod{x^{prec}}$
 Poly getInversed(Poly a, int prec) {
 	assert(a[0]);
 

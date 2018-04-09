@@ -1,11 +1,4 @@
-#include <bits/stdc++.h>
-
-#define all(x) (x).begin(), (x).end()
-
-using namespace std;
-
 using ld = double;
-
 const ld eps = 1e-9;
 
 struct point {
