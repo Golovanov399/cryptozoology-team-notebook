@@ -53,6 +53,7 @@ public:
 		}
 	}
 
+	// < key left, >= key right
 	void split(node v, int key, node& l, node& r) {
 		l = r = nullptr;
 		if (!v)

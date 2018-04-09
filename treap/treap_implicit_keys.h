@@ -60,6 +60,7 @@ public:
 		}
 	}
 
+	// < idx left, >= idx right
 	void split(node v, int idx, node& l, node& r) {
 		l = r = nullptr;
 		if (!v)
