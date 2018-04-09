@@ -1,59 +1,37 @@
+#undef NDEBUG
 #include <bits/stdc++.h>
+
 using namespace std;
 
-#define all(a) a.begin(), a.end()
-typedef long long li;
-typedef long double ld;
-void solve(__attribute__((unused)) bool);
-void precalc();
-clock_t start;
+using li = long long;
+using ld = long double;
+
+#define all(v) (v).begin(), (v).end()
+
+void solve(bool);
 
 int main() {
-#ifdef CRYPTO 
-    freopen("/PATH/input.txt", "r", stdin);
-#endif
-    start = clock();
-    int t = 1;
-#ifndef CRYPTO
-    cout.sync_with_stdio(0);
-    cin.tie(0);
-#endif
-    precalc();
-    cout.precision(20);
-    cout << fixed;
-//    cin >> t;
-    int testNum = 1;
-    while (t--) {
-        //cout << "Case #" << testNum++ << ": ";
-        solve(true);
-    }
-    cout.flush();
-#ifdef CRYPTO1
-    while (true) {
-      solve(false);
-  }
+#ifdef YA
+    auto s = clock();
+    assert(freopen("input.txt", "r", stdin));
+#else
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
 #endif
 
-#ifdef CRYPTO
-    cout.flush();
-    auto end = clock();
+    cout << fixed << setprecision(20);
 
-    usleep(10000);
-    print_stats(end - start);
-    usleep(10000);
+    solve(true);
+
+#ifdef YA1
+    while (true) solve(false);
+#endif
+
+#ifdef YA
+    cerr << endl << endl << (clock() - s) / (double)CLOCKS_PER_SEC << endl;
 #endif
 
     return 0;
-}
-
-void precalc() {
-}
-
-template<typename T>
-inline T nxt() {
-    T cur;
-    cin >> cur;
-    return cur;
 }
 
 //#define int li
