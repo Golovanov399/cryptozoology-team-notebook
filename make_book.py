@@ -27,7 +27,7 @@ header = """\\documentclass[10pt,twocolumn]{article}
 \\voffset = -3cm
 \\hoffset = -1.5cm
 
-\\renewcommand{\\baselinestretch}{0.85}
+\\renewcommand{\\baselinestretch}{0.82}
 
 \\makeatletter
 \\renewcommand{\\@oddhead}{\\tt Moscow I of Physics and Technology
