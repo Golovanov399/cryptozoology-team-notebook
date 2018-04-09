@@ -281,4 +281,58 @@ for (int i = 0; i < n; ++i) {
     }
 }
 \end{minted}
+
+\item Инициализация \texttt{min\_x} или \texttt{max\_x} недостаточной величиной
+
+Неправильно:
+
+\begin{minted}[mathescape,breaklines,tabsize=4,breaksymbolright=\tiny\ensuremath{\hookleftarrow}]{c++}
+int max_x = 0;
+for (const Point& pt : pts) {
+    max_x = max(max_x, pt.x);
+}
+\end{minted}
+
+Правильно:
+
+\begin{minted}[mathescape,breaklines,tabsize=4,breaksymbolright=\tiny\ensuremath{\hookleftarrow}]{c++}
+int max_x = -1e9;   // INT_MIN, LLONG_MIN, pts[0].x, ...
+for (const Point& pt : pts) {
+    max_x = max(max_x, pt.x);
+}
+\end{minted}
+
+\item \texttt{set} собственных структур $\Rightarrow$ оператор \texttt{<} должен быть строгим
+
+Неправильно:
+
+\begin{minted}[mathescape,breaklines,tabsize=4,breaksymbolright=\tiny\ensuremath{\hookleftarrow}]{c++}
+struct Task {
+    int need;
+    int boost;
+    int deadline;
+
+    bool operator <(const Task& ot) const {
+        return boost > ot.boost;
+    }
+};
+...
+set<Task> tasks;
+\end{minted}
+
+Правильно:
+
+\begin{minted}[mathescape,breaklines,tabsize=4,breaksymbolright=\tiny\ensuremath{\hookleftarrow}]{c++}
+struct Task {
+    int need;
+    int boost;
+    int deadline;
+
+    bool operator <(const Task& ot) const {
+        return boost > ot.boost;
+    }
+};
+...
+multiset<Task> tasks;  // или priority_queue, если критично
+\end{minted}
 \end{itemize}

@@ -53,7 +53,7 @@ minted_end = "\\end{minted}"
 
 allowed_extensions = ['.cpp', '.h', '.py', '.txt', '.tex']
 ext_to_lang = {'.cpp': 'c++', '.h': 'c++', '.py': 'python'}
-excluded_files = ['make_book.py', 'fft_test_double.cpp', 'fft_test_integer.cpp', 'fft_advanced_double.h']
+excluded_files = ['make_book.py', 'fft_test_double.cpp', 'fft_test_integer.cpp', 'fft_advanced_double.h', 'extended_euclidean.h']
 
 
 def get_minted(text, lang='c++'):

@@ -22,6 +22,9 @@ pair<int, int> crt(const vector<int>& mods, vector<int>& rems) {
 		}
 
 		int k = euc(mod, mods[i]).first * 1ll * (rems[i] - rem + mods[i]) % mods[i];
+		if (k < 0) {
+			k += mods[i];
+		}
 		rem += mod / g * k;
 		mod = mod / g * mods[i];
 	}

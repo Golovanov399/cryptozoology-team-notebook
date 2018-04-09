@@ -74,7 +74,6 @@ Poly multiply(Poly a, Poly b) {
 	while (n < (int)a.size() || n < (int)b.size()) {
 		n *= 2;
 	}
-	clock_t start = clock();
 	vector<base> ar(n + n), br(n + n);
 	for (int i = 0; i < (int)a.size(); ++i) {
 		ar[i] = a[i];
