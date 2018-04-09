@@ -1,17 +1,13 @@
-
-void Build(const string& init, vector <int>& suffArray, vector <int>& lcp) {
+void Build(const string& init, vector<int>& suffArray, vector<int>& lcp) {
     string s = init;
     s.push_back(char(0));
-    vector <int> head;
-    vector <int> color;
-    vector <int> colorSub;
-    vector <int> suffArraySub;
-    head.assign(max((int)s.size(), 256), 0);
-    suffArray.resize(s.size());
-    color.resize(s.size());
-    colorSub.resize(s.size());
-    suffArraySub.resize(s.size());
-    lcp.resize(s.size());
+    int n = s.size();
+    vector<int> head(max(n, 256));
+    vector<int> color(n);
+    vector<int> colorSub(n);
+    vector<int> suffArraySub(n);
+    lcp.resize(n);
+    suffArray.resize(n);
 
     for (int i = 0; i < s.size(); ++i) {
         ++head[s[i]];
@@ -27,50 +23,50 @@ void Build(const string& init, vector <int>& suffArray, vector <int>& lcp) {
         suffArray[head[s[i]]] = i;
         ++head[s[i]];
     }
-    int numberOfClasses = 1;
+    int numClasses = 1;
     head[0] = 0;
     for (int i = 1; i < s.size(); ++i) {
         if (s[suffArray[i - 1]] != s[suffArray[i]]) {
-            ++numberOfClasses;
-            head[numberOfClasses - 1] = i;
+            ++numClasses;
+            head[numClasses - 1] = i;
         }
-        color[suffArray[i]] = numberOfClasses - 1;
+        color[suffArray[i]] = numClasses - 1;
     }
     for (int k = 1; k < s.size(); k *= 2) {
         for (int i = 0; i < s.size(); ++i) {
-            int firstPartBeginning = suffArray[i] - k;
-            if (firstPartBeginning < 0) {
-                firstPartBeginning += s.size();
+            int first = suffArray[i] - k;
+            if (first < 0) {
+                first += s.size();
             }
-            suffArraySub[head[color[firstPartBeginning]]] = firstPartBeginning;
-            ++head[color[firstPartBeginning]];
+            suffArraySub[head[color[first]]] = first;
+            ++head[color[first]];
         }
         suffArray = suffArraySub;
 
-        int secondPartBeginning;
-        pair <int, int> prevSuffClasses, curSuffClasses;
-        curSuffClasses = make_pair(-1, 0);
-        numberOfClasses = 0;
+        int second;
+        pair<int, int> prevClasses, curClasses;
+        curClasses = { -1, 0 };
+        numClasses = 0;
 
         for (int i = 0; i < s.size(); ++i) {
-            prevSuffClasses = curSuffClasses;
+            prevClasses = curClasses;
 
-            secondPartBeginning = suffArray[i] + k;
-            if (secondPartBeginning >= s.size()) {
-                secondPartBeginning -= s.size();
+            second = suffArray[i] + k;
+            if (second >= s.size()) {
+                second -= s.size();
             }
-            curSuffClasses = make_pair(color[suffArray[i]], color[secondPartBeginning]);
+            curClasses = { color[suffArray[i]], color[second] };
 
-            if (curSuffClasses != prevSuffClasses) {
-                ++numberOfClasses;
-                head[numberOfClasses - 1] = i;
+            if (curClasses != prevClasses) {
+                ++numClasses;
+                head[numClasses - 1] = i;
             }
-            colorSub[suffArray[i]] = numberOfClasses - 1;
+            colorSub[suffArray[i]] = numClasses - 1;
         }
 
         color = colorSub;
 
-        if (numberOfClasses == s.size())
+        if (numClasses == s.size())
             break;
     }
     vector <int> pos;
@@ -103,7 +99,7 @@ void BuildSparseTable(const vector <int>& a, vector < vector <int> >& sparseTabl
     while ((1 << logSize) < a.size()) {
         ++logSize;
     }
-    logSize = 19;
+    logSize = 19; // <-- THINK HERE!
     sparseTable.assign(a.size(), vector <int> (logSize + 1));
 
     for (int i = 0; i < a.size(); ++i) {
@@ -127,13 +123,13 @@ void solve(__attribute__((unused)) bool read) {
     string s;
     cin >> s;
     int n = s.length();
-    vector<int> suff_array, lcp;
-    Build(s, suff_array, lcp);
-    suff_array.erase(suff_array.begin());
+    vector<int> suffArray, lcp;
+    Build(s, suffArray, lcp);
+    suffArray.erase(suffArray.begin());
     lcp.erase(lcp.begin());
     vector<int> pos_in_array(n);
-    for (int i = 0; i < suff_array.size(); ++i) {
-        pos_in_array[suff_array[i]] = i;
+    for (int i = 0; i < suffArray.size(); ++i) {
+        pos_in_array[suffArray[i]] = i;
     }
     vector<vector<int>> sparse;
     BuildSparseTable(lcp, sparse);
