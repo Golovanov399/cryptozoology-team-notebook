@@ -1,23 +1,5 @@
 Poly multiply(const Poly& a, const Poly& b) {
-	int n = 1;
-	while (n <= a.size() || n <= b.size())
-		n <<= 1;
-	n <<= 1;
-	vector<base> input[2];
-	for (int w = 0; w < 2; ++w)
-		input[w].assign(n, base(0, 0));
-	for (int i = 0; i < a.size(); ++i)
-		input[0][i] = a[i];
-	for (int i = 0; i < b.size(); ++i)
-		input[1][i] = b[i];
-	for (auto& vec : input) {
-		fft(vec, false);
-	}
-	vector <base> res(n);
-	for (int i = 0; i < n; ++i)
-		res[i] = input[0][i] * input[1][i];
-	fft(res, true);
-	Poly answer(n);
+.....
 	for (int i = 0; i < n; ++i) {
 		answer[i] = (li)(res[i].real() + 0.5);
 		answer[i] %= mod;
