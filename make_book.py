@@ -23,7 +23,7 @@ header = """\\documentclass[10pt,twocolumn]{article}
 \\pagestyle{myheadings}
 
 \\textheight = 780pt
-\\textwidth = 530pt
+\\textwidth = 540pt
 \\voffset = -3cm
 \\hoffset = -1.5cm
 
