@@ -187,7 +187,7 @@ Poly exponent(Poly a, int prec) {
 	auto c = a[0];
 	a[0] = 0;
 
-	Poly res = {0};
+	Poly res = {1};
 	int k = 1;
 	while (k < prec) {
 		k *= 2;

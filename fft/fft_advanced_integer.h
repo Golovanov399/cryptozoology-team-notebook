@@ -183,7 +183,7 @@ Poly logarithm(Poly a, int prec) {
 Poly exponent(Poly a, int prec) {
 	assert(a[0] == 0);
 
-	Poly res = {0};
+	Poly res = {1};
 	int k = 1;
 	while (k < prec) {
 		k *= 2;
