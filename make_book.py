@@ -22,23 +22,23 @@ header = """\\documentclass[10pt,twocolumn]{article}
 
 \\pagestyle{myheadings}
 
-\\textheight = 780pt
+\\textheight = 750pt
 \\textwidth = 540pt
 \\voffset = -3cm
 \\hoffset = -1.5cm
 
-\\renewcommand{\\baselinestretch}{0.82}
+\\renewcommand{\\baselinestretch}{0.80}
 
 \\makeatletter
-\\renewcommand{\\@oddhead}{\\tt Moscow I of Physics and Technology
+\\renewcommand{\\@oddhead}{\\tt Moscow IPT Good Game (Golovanov, Machula, Uvarov)
 \\hfil\\thepage}
 \\makeatother
 
 \\begin{document}
 
-\\begin{titlepage}
-\\includegraphics[height=.9\\textheight]{titlepic}
-\\end{titlepage}
+%\\begin{titlepage}
+%\\includegraphics[height=.9\\textheight]{titlepic}
+%\\end{titlepage}
 
 \\small
 \\usemintedstyle{pastie}
